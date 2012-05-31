@@ -88,12 +88,13 @@ class Mage_Payment_Helper_Data extends Mage_Core_Helper_Abstract
         return $res;
     }
 
-    protected function _sortMethods($a, $b)
+    protected function _sortMethods(Mage_Payment_Model_Method_Abstract $a, Mage_Payment_Model_Method_Abstract $b)
     {
-        if (is_object($a)) {
-            return (int)$a->sort_order < (int)$b->sort_order ? -1 : ((int)$a->sort_order > (int)$b->sort_order ? 1 : 0);
+        if ($a === null || $b === null) {
+            return 0;
+        } else {
+            return ($a->getSortOrder() - $b->getSortOrder());
         }
-        return 0;
     }
 
     /**
