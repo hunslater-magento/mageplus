@@ -70,6 +70,10 @@ class Mage_Payment_Helper_Data extends Mage_Core_Helper_Abstract
                 Mage::log($this->__('Could not load payment method (%s) model (%s)', $code, $model), Zend_Log::ERR);
                 continue;
             }
+            if(!$methodInstance instanceof Mage_Payment_Model_Method_Abstract) {
+                Mage::log($this->__('Loaded model (%s) for payment method (%s) is the wrong type (%s)', $model, $code, get_class($methodInstance)), Zend_Log::ERR);
+                continue;
+            }
             $methodInstance->setStore($store);
             if (!$methodInstance->isAvailable($quote)) {
                 /* if the payment method cannot be used at this time */
