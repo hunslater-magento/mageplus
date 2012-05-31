@@ -67,6 +67,7 @@ class Mage_Payment_Helper_Data extends Mage_Core_Helper_Abstract
             }
             $methodInstance = Mage::getModel($model);
             if (!$methodInstance) {
+                Mage::log($this->__('Could not load payment method (%s) model (%s)', $code, $model), Zend_Log::ERR);
                 continue;
             }
             $methodInstance->setStore($store);
